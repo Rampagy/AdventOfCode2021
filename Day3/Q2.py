@@ -1,14 +1,21 @@
 def MostCommon(count, total):
     isMostCommon = True
-    if count < total / 2:
+    if count * 2 < total:
         isMostCommon = False
     return isMostCommon
 
 def LeastCommon(count, total):
     isLeastCommon = False
-    if count <= total / 2:
+    if count * 2 <= total:
         isLeastCommon = True
     return isLeastCommon
+
+def ConvertToDecimal(BCDString):
+    decimal_val = 0
+    for i in range(12):
+        if BCDString[i] == '1':
+            decimal_val |= 1 << (11-i)
+    return decimal_val
 
 if __name__ == '__main__':
     numbers = []
@@ -66,17 +73,17 @@ if __name__ == '__main__':
             if MostCommon(ones_count[round], count): 
                 if number[round] == '0':
                     # the current number did not have a 1 in that position, so remove it
-                    if len(oxygen) <= 2 and number[round] == '1':
-                            EXIT = False
+                    if len(oxygen) <= 1:
+                            EXIT = True
                             break
                     oxygen.remove(number)
             
             # determine if zero is the most common
-            if MostCommon(count-ones_count[round], count):
+            elif MostCommon(count-ones_count[round], count):
                 if number[round] == '1':
                     # the current number did not have a 0 in that position, so remove it
-                    if len(oxygen) <= 2 and number[round] == '1':
-                            EXIT = False
+                    if len(oxygen) <= 1:
+                            EXIT = True
                             break
                     oxygen.remove(number)
 
@@ -126,24 +133,25 @@ if __name__ == '__main__':
 
         ones_count = [let1, let2, let3, let4, let5, let6, let7, let8, let9, let10, let11, let12]
 
+
     EXIT = False
     scrubber = numbers.copy()
-    for round in range(5):
+    for round in range(12):
         for number in scrubber.copy():
-            if LeastCommon(ones_count[round], count):
-                # if one is least common and the bit AND comes out to be a zero it need to be removed
-                if number[round] == '0':
-                    if len(scrubber) <= 2 and number[round] == '0':
+            if LeastCommon(count-ones_count[round], count):
+                # if zero is least common and the bit AND comes out to be a one it need to be removed
+                if number[round] == '1':
+                    if len(scrubber) <= 1:
                         EXIT = True
                         break
                     scrubber.remove(number)
 
-            if LeastCommon(count-ones_count[round], count):
-                # if zero is least common and the bit AND comes out to be a one it need to be removed
-                if number[round] == '1':
-                    if len(scrubber) <= 2 and number[round] == '0':
-                            EXIT = True
-                            break
+            elif LeastCommon(ones_count[round], count):
+                # if one is least common and the bit AND comes out to be a zero it need to be removed
+                if number[round] == '0':
+                    if len(scrubber) <= 1:
+                        EXIT = True
+                        break
                     scrubber.remove(number)
 
         if EXIT:
@@ -192,7 +200,7 @@ if __name__ == '__main__':
 
         ones_count = [let1, let2, let3, let4, let5, let6, let7, let8, let9, let10, let11, let12]
 
-
-    print(oxygen, scrubber)
+    # 2981085
+    print(oxygen, scrubber, ConvertToDecimal(oxygen[0]) * ConvertToDecimal(scrubber[0]))
 
 

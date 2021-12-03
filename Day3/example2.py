@@ -1,12 +1,12 @@
 def MostCommon(count, total):
     isMostCommon = True
-    if count < total / 2:
+    if count * 2 < total:
         isMostCommon = False
     return isMostCommon
 
 def LeastCommon(count, total):
     isLeastCommon = False
-    if count <= total / 2:
+    if count * 2 <= total:
         isLeastCommon = True
     return isLeastCommon
 
@@ -47,6 +47,7 @@ if __name__ == '__main__':
     EXIT = False
     oxygen = numbers.copy()
     for round in range(5):
+        print('oxygen round:', round)
         for number in oxygen.copy():
             # determine if one is the most common
             if MostCommon(ones_count[round], count): 
@@ -65,6 +66,8 @@ if __name__ == '__main__':
                             EXIT = False
                             break
                     oxygen.remove(number)
+
+        print(oxygen)
 
         if EXIT:
             break
@@ -91,10 +94,12 @@ if __name__ == '__main__':
 
             ones_count = [let1, let2, let3, let4, let5, let6, let7, let8, let9, let10, let11, let12]
 
+    print()
 
     EXIT = False
     scrubber = numbers.copy()
     for round in range(5):
+        print('scrubber round: ', round)
         for number in scrubber.copy():
             if LeastCommon(ones_count[round], count):
                 # if one is least common and the bit AND comes out to be a zero it need to be removed
@@ -111,6 +116,8 @@ if __name__ == '__main__':
                         EXIT = True
                         break
                     scrubber.remove(number)
+
+        print(scrubber)
 
         if EXIT:
             break

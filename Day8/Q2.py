@@ -70,17 +70,17 @@ if __name__ == '__main__':
 
                     if val == 7 and 'a' in key and 'c' in key:
                         # 'f' (7 - 'a' - 'c')
-                        solved_letters[segment] = replaceChars(key, 'ac') #key.replace('ac', '')
+                        solved_letters[segment] = replaceChars(key, 'ac')
                         break
 
                     if val == 4 and 'd' in solved_letters:
                         # 'b' (4 - 1 - 'd')
-                        solved_letters[segment] = replaceChars(key, one_item+solved_letters['d']) #key.replace(seven_item + solved_letters['d'], '')
+                        solved_letters[segment] = replaceChars(key, one_item+solved_letters['d'])
                         break
 
                     if set(key) < set(eight_item) and val == 4 and 'a' in solved_letters and 'd' in solved_letters:
                         # 'g' (8 - 4 - 'a' - 'e')
-                        solved_letters[segment] = replaceChars(eight_item, key+solved_letters['a']+solved_letters['e']) #eight_item.replace(key+solved_letters['a']+solved_letters['e'])
+                        solved_letters[segment] = replaceChars(eight_item, key+solved_letters['a']+solved_letters['e'])
                         break
 
 

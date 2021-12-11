@@ -1,5 +1,5 @@
 if __name__ == '__main__':
-    with open('input1.txt', 'r') as f:
+    with open('input.txt', 'r') as f:
         points = 0
         for line_count, line in enumerate(f):
             line = line.strip()

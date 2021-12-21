@@ -6,7 +6,7 @@ def unpad(x, pad_width):
         new_x += [row[pad_width:-pad_width]]
     return new_x
 
-def generate_new_picture(picture, img_enhance_alg, iteration):
+def generate_new_picture(picture, img_enhance_alg):
     new_picture = []
     expanded_pic = np.pad(picture, 3)
 
@@ -61,10 +61,11 @@ if __name__ == '__main__':
                 if row != []:
                     picture += [row]
 
-    for i in range(2):
-        picture = generate_new_picture(picture, img_enhance_alg, i)
+    for i in range(50):
+        picture = generate_new_picture(picture, img_enhance_alg)
 
-    picture = unpad(picture, 4)
+        if i % 2 == 1:
+            picture = unpad(picture, 4)
 
     accum = 0
     for row in picture:
